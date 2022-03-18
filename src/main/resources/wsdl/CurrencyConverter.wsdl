@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<definitions    xmlns="http://schemas.xmlsoap.org/wsdl/"
+                xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                xmlns:tns= "http://example.org/CurrencyConverter"
+                targetNamespace="http://example.org/CurrencyConverter"
+                name = "CurrencyConverterService">
+    <types>
+        <xsd:schema>
+            <xsd:import namespace="http://example.org/CurrencyConverter" schemaLocation="CurrencyConverter.xsd"  />
+        </xsd:schema>
+    </types>
+
+    <message name="currenciesListRequest"> <part name="parameters" element="tns:currenciesListRequest"/></message>
+    <message name="currenciesListResponse"> <part name="parameters" element="tns:currenciesListResponse"/></message>
+    <message name="getCurrencyPerCodeRequest"> <part name="parameters" element="tns:currency"/></message>
+    <message name="getCurrencyPerCodeResponse"> <part name="parameters" element="tns:getCurrencyPerCodeResponse"/></message>
+
+    <message name="invalidInputError"><part name="fault"  element="tns:invalidInputError" /></message>
+
+
+    <portType name="CurrencyConverterInterface">
+
+        <operation name="currenciesList">
+            <input message="tns:currenciesListRequest"/>
+            <output message="tns:currenciesListResponse"/>
+        </operation>
+
+        <operation name="currencyPerCode">
+            <input message="tns:getCurrencyPerCodeRequest"/>
+            <output message="tns:getCurrencyPerCodeResponse"/>
+            <fault  message="tns:invalidInputError" name="invalidInputError" />
+        </operation>
+
+    </portType>
+
+    <binding name="CurrencyConverterPortBinding" type="tns:CurrencyConverterInterface">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+        <operation name="currenciesList">
+            <soap:operation soapAction="http://example.org/ListCurrencies"/>
+            <input><soap:body use="literal"/></input>
+            <output><soap:body use="literal"/></output>
+        </operation>
+
+        <operation name="currencyPerCode">
+            <soap:operation soapAction="http://example.org/GetCurrencyPerCode"/>
+            <input><soap:body use="literal"/></input>
+            <output><soap:body use="literal"/></output>
+            <fault name="invalidInputError"><soap:fault name="invalidInputError" use="literal" /></fault>
+
+        </operation>
+
+    </binding>
+
+    <service name="CurrencyConverterService">
+        <documentation>This document describes the Currency Converter Web service.</documentation>
+        <port name="CurrencyConverterPort" binding="tns:CurrencyConverterPortBinding">
+            <soap:address location="http://localhost:8080/currency-converter-1.0.0/services"/>
+        </port>
+
+    </service>
+</definitions>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="3738c00e-4c56-4bf7-9cba-c4c2ca8b323e" activeEnvironment="Default" name="currency-converter" resourceRoot="" soapui-version="5.7.0" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="de2aee77-75da-4696-8b88-23386e5313f0" wsaVersion="NONE" name="CurrencyConverterServiceSoapBinding" type="wsdl" bindingName="{http://example.org/CurrencyConverter}CurrencyConverterServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="https://localhost:4321/currency-converter-1.0.0/services/CurrencyConverterService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="https://localhost:4321/currency-converter-1.0.0/services/CurrencyConverterService?wsdl"><con:part><con:url>https://localhost:4321/currency-converter-1.0.0/services/CurrencyConverterService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="CurrencyConverterService" targetNamespace="http://example.org/CurrencyConverter" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://example.org/CurrencyConverter" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+  <wsdl:types>
+    <xs:schema targetNamespace="http://example.org/CurrencyConverter" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="currenciesListRequest">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="currenciesListResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="currencyItem" type="tns:currencyItem"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="currency" type="xs:string"/>
+      <xs:element name="getCurrencyPerCodeResponse" type="tns:currencyItem"/>
+      <xs:element name="invalidInputError" type="xs:string"/>
+      <xs:complexType name="currencyItem">
+        <xs:sequence>
+          <xs:element name="currency" type="xs:string"/>
+          <xs:element name="rate" type="xs:double"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="currenciesListResponse">
+    <wsdl:part element="tns:currenciesListResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="currencyPerCode">
+    <wsdl:part element="tns:currency" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="currencyPerCodeResponse">
+    <wsdl:part element="tns:getCurrencyPerCodeResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="currenciesList">
+    <wsdl:part element="tns:currenciesListRequest" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="InvalidInputError">
+    <wsdl:part element="tns:invalidInputError" name="InvalidInputError"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="CurrencyConverterInterface">
+    <wsdl:operation name="currenciesList">
+      <wsdl:input message="tns:currenciesList" name="currenciesList"></wsdl:input>
+      <wsdl:output message="tns:currenciesListResponse" name="currenciesListResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="currencyPerCode">
+      <wsdl:input message="tns:currencyPerCode" name="currencyPerCode"></wsdl:input>
+      <wsdl:output message="tns:currencyPerCodeResponse" name="currencyPerCodeResponse"></wsdl:output>
+      <wsdl:fault message="tns:InvalidInputError" name="InvalidInputError"></wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CurrencyConverterServiceSoapBinding" type="tns:CurrencyConverterInterface">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="currenciesList">
+      <soap:operation soapAction="http://example.org/ListCurrencies" style="document"/>
+      <wsdl:input name="currenciesList">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="currenciesListResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="currencyPerCode">
+      <soap:operation soapAction="http://example.org/GetCurrencyPerCode" style="document"/>
+      <wsdl:input name="currencyPerCode">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="currencyPerCodeResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidInputError">
+        <soap:fault name="InvalidInputError" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CurrencyConverterService">
+    <wsdl:port binding="tns:CurrencyConverterServiceSoapBinding" name="CurrencyConverterPort">
+      <soap:address location="https://localhost:4321/currency-converter-1.0.0/services/CurrencyConverterService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>https://localhost:4321/currency-converter-1.0.0/services/CurrencyConverterService</con:endpoint></con:endpoints><con:operation id="01578f03-b63f-479a-ab3f-0701112aaa54" isOneWay="false" action="http://example.org/ListCurrencies" name="currenciesList" bindingOperationName="currenciesList" type="Request-Response" outputName="currenciesListResponse" inputName="currenciesList" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="aa980a14-993d-421a-b84c-0b6e579a5489" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://localhost:4321/currency-converter-1.0.0/services/CurrencyConverterService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cur="http://example.org/CurrencyConverter">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cur:currenciesListRequest/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:username>group1</con:username><con:password>group1</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://example.org/ListCurrencies"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="0766a23c-c83f-4c7f-ad9e-6c84ba6e295a" isOneWay="false" action="http://example.org/GetCurrencyPerCode" name="currencyPerCode" bindingOperationName="currencyPerCode" type="Request-Response" outputName="currencyPerCodeResponse" inputName="currencyPerCode" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="d9d47e6b-a82e-486b-93c0-73a95921ee62" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://localhost:4321/currency-converter-1.0.0/services/CurrencyConverterService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cur="http://example.org/CurrencyConverter">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cur:currency>USD</cur:currency>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:username>group1</con:username><con:password>group1</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://example.org/GetCurrencyPerCode"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>
