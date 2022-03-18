@@ -31,7 +31,7 @@ https://localhost:4321/currency-converter-1.0.0/services/CurrencyConverterServic
 ## Docker
 
 1. `docker build -t currency-converter .`
-2. `docker run -p 4321:4321 -p 8080:8080 currency-converter`
+2. `docker run --name currency-converter -d -p 4321:4321 -p 8080:8080 currency-converter`
 
 ## Testing
 
