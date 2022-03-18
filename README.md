@@ -7,7 +7,7 @@
 3. `mvn package`
 4. `mvn tomee:run`
 5. Open a browser and go to https://localhost:4321/currency-converter-1.0.0/services (Username/Password see Credentials)
-6. To stop the sercies type `exit` in your terminal
+6. To stop the service type `exit` in your terminal
 
 ## Endpoints
 
@@ -23,7 +23,7 @@ https://localhost:4321/currency-converter-1.0.0/services/CurrencyConverterServic
 ### WSDL
 https://localhost:4321/currency-converter-1.0.0/services/CurrencyConverterService?wsdl
 
-## Credentials
+### Credentials
 
 * Username: group1 
 * Password: group1
@@ -33,13 +33,19 @@ https://localhost:4321/currency-converter-1.0.0/services/CurrencyConverterServic
 1. `docker build -t currency-converter .`
 2. `docker run -p 4321:4321 -p 8080:8080 currency-converter`
 
-## Client (written in Node.js)
+## Testing
+
+### Client (written in Node.js)
 
 works only when the service is running (see Getting Started or Docker)
 
 1. Go to `cd currency-converter-soap/src/main/client`
 2. `npm install`
 3. node client.js
+
+### SoapUI
+
+Import Workspace from `currency-converter-soap/src/main/resources/soapUI/currency-converter-soapui-project.xml` 
 
 ## Reference Documentation
 
